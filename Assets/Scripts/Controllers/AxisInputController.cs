@@ -26,6 +26,6 @@ public class AxisInputController : InputController
 
 	public Vector2 direction()
 	{
-		return new Vector2(Input.GetAxis ("Horizontal"), Input.GetAxis("Vertical"));
+		return new Vector2(Input.GetAxis ("Left Stick X Axis"), Input.GetAxis("Left Stick Y Axis"));
 	}
 }

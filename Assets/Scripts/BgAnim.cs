@@ -6,10 +6,8 @@ public class BgAnim : MonoBehaviour
 {
 	public float fromScale;
 	public float toScale;
-
 	public float fromRotation;
 	public float toRotation;
-
 	public Vector2 angle;
 	public float speed;
 	public Color fromColor;
@@ -19,27 +17,36 @@ public class BgAnim : MonoBehaviour
 
 	private SpriteRenderer rendering;
 
-	void Start()
-	{
-		rendering = GetComponent<SpriteRenderer> ();
-	}
-
 	void Update () 
 	{
 		life -= Time.deltaTime;
 		if (life <= 0f) {
-			Destroy (this);
+			Destroy (this.gameObject);
+		} else {
+			updateColor ();
+		}
+	}
+
+	void FixedUpdate()
+	{
+		updatePosition ();
+	}
+
+	public void updateColor()
+	{
+		if (rendering == null) {
+			rendering = GetComponent<SpriteRenderer> ();
 		}
 
 		float p = getP ();
 		float r = fromColor.r + (toColor.r - fromColor.r) * p;
 		float g = fromColor.g + (toColor.g - fromColor.g) * p;
 		float b = fromColor.b + (toColor.b - fromColor.b) * p;
-
-		rendering.color = new Color (r, g, b);
+		float a = fromColor.a + (toColor.a - fromColor.a) * p;
+		rendering.color = new Color (r, g, b, a);
 	}
 
-	void FixedUpdate()
+	public void updatePosition()
 	{
 		float p = getP ();
 		float scale = fromScale + (toScale - fromScale) * p;
