@@ -24,11 +24,11 @@ public class InitializePlayers : MonoBehaviour
 	void Start ()
 	{
 		paddle1 = (GameObject)Instantiate(Resources.Load ("paddle"));
-		player1 = new Player (Color.red, new KeyInputController(KeyCode.LeftArrow, KeyCode.RightArrow, KeyCode.RightShift));
+		player1 = new Player (Color.red, Joystick.GetJoystick("1"));
 		paddle1.getPaddle ().player = player1;
 
 		paddle2 = (GameObject)Instantiate(Resources.Load ("paddle"));
-		player2 = new Player (Color.blue, new KeyInputController (KeyCode.A, KeyCode.D, KeyCode.LeftShift));
+		player2 = new Player (Color.blue, Joystick.GetJoystick("1"));
 		paddle2.getPaddle ().player = player2;
 
 		resetBall ();

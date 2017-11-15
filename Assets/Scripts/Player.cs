@@ -5,9 +5,9 @@ using UnityEngine;
 public class Player 
 {
 	public Color color;
-	public InputController controller;
+	public JoystickController controller;
 
-	public Player(Color color, InputController controller)
+	public Player(Color color, JoystickController controller)
 	{
 		this.color = color;
 		this.controller = controller;

@@ -50,10 +50,9 @@
      <Compile Include="Assets\Scripts\Ball.cs" />
      <Compile Include="Assets\Scripts\BgAnim.cs" />
      <Compile Include="Assets\Scripts\CameraBackground.cs" />
-     <Compile Include="Assets\Scripts\Controllers\AxisInputController.cs" />
-     <Compile Include="Assets\Scripts\Controllers\CursorInputController.cs" />
-     <Compile Include="Assets\Scripts\Controllers\InputController.cs" />
-     <Compile Include="Assets\Scripts\Controllers\KeyInputController.cs" />
+     <Compile Include="Assets\Scripts\Controllers\Joystick.cs" />
+     <Compile Include="Assets\Scripts\Controllers\JoystickController.cs" />
+     <Compile Include="Assets\Scripts\Controllers\JoystickDebugger.cs" />
      <Compile Include="Assets\Scripts\Extensions.cs" />
      <Compile Include="Assets\Scripts\InitializePlayers.cs" />
      <Compile Include="Assets\Scripts\Main.cs" />

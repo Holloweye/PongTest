@@ -20,15 +20,13 @@ public class Paddle : MonoBehaviour
 	void FixedUpdate()
 	{
 		if (player != null && player.controller != null) {
-			if (player.controller.getType () == InputType.Directional) {
-				var origin = new Vector2 (0, 0);
-				angle = origin.angle (player.controller.direction ());
-			} else if (player.controller.getType () == InputType.Key) {
-				if (player.controller.left ())
-					angle += 1.0f * Time.deltaTime * (player.controller.boost () ? 5.0f : 1.0f);
+			var x = player.controller.getAxis (JoystickAxis.RIGHT_STICK_X);
+			var y = 0f - player.controller.getAxis (JoystickAxis.RIGHT_STICK_Y);
 
-				if (player.controller.right ())
-					angle -= 1.0f * Time.deltaTime * (player.controller.boost () ? 5.0f : 1.0f);
+			if (x <= -0.1f || x >= 0.1f || y <= -0.1f || y >= 0.1f)
+			{
+				var origin = new Vector2 ();
+				angle = origin.angle (new Vector2 (x, y));
 			}
 		}
 
