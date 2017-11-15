@@ -17,7 +17,7 @@ public class JoystickDebugger : MonoBehaviour
 	{
 		foreach(JoystickButton e in Enum.GetValues(typeof(JoystickButton)))
 		{
-			if (this.controller.getKey (e)) 
+			if (this.controller.getButton (e)) 
 			{
 				Debug.Log ("" + e.ToString () + " - isPressed");
 			}

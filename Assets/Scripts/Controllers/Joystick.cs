@@ -6,29 +6,53 @@ public static class Joystick
 {
 	public static JoystickController GetJoystick(string joystickNumber)
 	{
-		Dictionary<JoystickButton, string> buttons 	= new Dictionary<JoystickButton, string> ();
-		Dictionary<JoystickAxis, string> axis 		= new Dictionary<JoystickAxis, string> ();
+		Dictionary<JoystickButton, string> winButtons 	= new Dictionary<JoystickButton, string> ();
+		Dictionary<JoystickAxis, string> winAxis 		= new Dictionary<JoystickAxis, string> ();
+		Dictionary<JoystickButton, string> macButtons 	= new Dictionary<JoystickButton, string> ();
+		Dictionary<JoystickAxis, string> macAxis 		= new Dictionary<JoystickAxis, string> ();
 
-		buttons [JoystickButton.A] 				= "joystick " + joystickNumber + " a";
-		buttons [JoystickButton.B] 				= "joystick " + joystickNumber + " b";
-		buttons [JoystickButton.X] 				= "joystick " + joystickNumber + " x";
-		buttons [JoystickButton.Y] 				= "joystick " + joystickNumber + " y";
-		buttons [JoystickButton.LEFT_BUMP] 		= "joystick " + joystickNumber + " left bump";
-		buttons [JoystickButton.RIGHT_BUMP] 	= "joystick " + joystickNumber + " right bump";
-		buttons [JoystickButton.VIEW] 			= "joystick " + joystickNumber + " view";
-		buttons [JoystickButton.START] 			= "joystick " + joystickNumber + " start";
-		buttons [JoystickButton.LEFT_STICK] 	= "joystick " + joystickNumber + " left stick";
-		buttons [JoystickButton.RIGHT_STICK] 	= "joystick " + joystickNumber + " right stick";
+		winButtons [JoystickButton.A] 				= "joystick win " + joystickNumber + " a";
+		winButtons [JoystickButton.B] 				= "joystick win " + joystickNumber + " b";
+		winButtons [JoystickButton.X] 				= "joystick win " + joystickNumber + " x";
+		winButtons [JoystickButton.Y] 				= "joystick win " + joystickNumber + " y";
+		winButtons [JoystickButton.LEFT_BUMP] 		= "joystick win " + joystickNumber + " left bump";
+		winButtons [JoystickButton.RIGHT_BUMP] 		= "joystick win " + joystickNumber + " right bump";
+		winButtons [JoystickButton.VIEW] 			= "joystick win " + joystickNumber + " view";
+		winButtons [JoystickButton.START] 			= "joystick win " + joystickNumber + " start";
+		winButtons [JoystickButton.LEFT_STICK] 		= "joystick win " + joystickNumber + " left stick";
+		winButtons [JoystickButton.RIGHT_STICK] 	= "joystick win " + joystickNumber + " right stick";
 
-		axis [JoystickAxis.LEFT_STICK_X] 	= "joystick " + joystickNumber + " left stick horizontal";
-		axis [JoystickAxis.LEFT_STICK_Y] 	= "joystick " + joystickNumber + " left stick vertical";
-		axis [JoystickAxis.RIGHT_STICK_X] 	= "joystick " + joystickNumber + " right stick horizontal";
-		axis [JoystickAxis.RIGHT_STICK_Y] 	= "joystick " + joystickNumber + " right stick vertical";
-		axis [JoystickAxis.DPAD_X] 			= "joystick " + joystickNumber + " dpad horizontal";
-		axis [JoystickAxis.DPAD_Y] 			= "joystick " + joystickNumber + " dpad vertical";
-		axis [JoystickAxis.LEFT_TRIGGER] 	= "joystick " + joystickNumber + " left trigger";
-		axis [JoystickAxis.RIGHT_TRIGGER] 	= "joystick " + joystickNumber + " right trigger";
+		winAxis [JoystickAxis.LEFT_STICK_X] 	= "joystick win " + joystickNumber + " left stick horizontal";
+		winAxis [JoystickAxis.LEFT_STICK_Y] 	= "joystick win " + joystickNumber + " left stick vertical";
+		winAxis [JoystickAxis.RIGHT_STICK_X] 	= "joystick win " + joystickNumber + " right stick horizontal";
+		winAxis [JoystickAxis.RIGHT_STICK_Y] 	= "joystick win " + joystickNumber + " right stick vertical";
+		winAxis [JoystickAxis.DPAD_X] 			= "joystick win " + joystickNumber + " dpad horizontal";
+		winAxis [JoystickAxis.DPAD_Y] 			= "joystick win " + joystickNumber + " dpad vertical";
+		winAxis [JoystickAxis.LEFT_TRIGGER] 	= "joystick win " + joystickNumber + " left trigger";
+		winAxis [JoystickAxis.RIGHT_TRIGGER] 	= "joystick win " + joystickNumber + " right trigger";
 
-		return new JoystickController (buttons, axis);
+		macButtons [JoystickButton.A] 				= "joystick mac " + joystickNumber + " a";
+		macButtons [JoystickButton.B] 				= "joystick mac " + joystickNumber + " b";
+		macButtons [JoystickButton.X] 				= "joystick mac " + joystickNumber + " x";
+		macButtons [JoystickButton.Y] 				= "joystick mac " + joystickNumber + " y";
+		macButtons [JoystickButton.LEFT_BUMP] 		= "joystick mac " + joystickNumber + " left bump";
+		macButtons [JoystickButton.RIGHT_BUMP] 		= "joystick mac " + joystickNumber + " right bump";
+		macButtons [JoystickButton.VIEW] 			= "joystick mac " + joystickNumber + " view";
+		macButtons [JoystickButton.START] 			= "joystick mac " + joystickNumber + " start";
+		macButtons [JoystickButton.LEFT_STICK] 		= "joystick mac " + joystickNumber + " left stick";
+		macButtons [JoystickButton.RIGHT_STICK] 	= "joystick mac " + joystickNumber + " right stick";
+		macButtons [JoystickButton.DPAD_UP] 		= "joystick mac " + joystickNumber + " dpad up";
+		macButtons [JoystickButton.DPAD_LEFT] 		= "joystick mac " + joystickNumber + " dpad left";
+		macButtons [JoystickButton.DPAD_DOWN] 		= "joystick mac " + joystickNumber + " dpad down";
+		macButtons [JoystickButton.DPAD_RIGHT] 		= "joystick mac " + joystickNumber + " dpad right";
+
+		macAxis [JoystickAxis.LEFT_STICK_X] 	= "joystick mac " + joystickNumber + " left stick horizontal";
+		macAxis [JoystickAxis.LEFT_STICK_Y] 	= "joystick mac " + joystickNumber + " left stick vertical";
+		macAxis [JoystickAxis.RIGHT_STICK_X] 	= "joystick mac " + joystickNumber + " right stick horizontal";
+		macAxis [JoystickAxis.RIGHT_STICK_Y] 	= "joystick mac " + joystickNumber + " right stick vertical";
+		macAxis [JoystickAxis.DPAD_X] 			= "joystick mac " + joystickNumber + " dpad horizontal";
+		macAxis [JoystickAxis.DPAD_Y] 			= "joystick mac " + joystickNumber + " dpad vertical";
+
+		return new JoystickController (winButtons, winAxis, macButtons, macAxis);
 	}
 }

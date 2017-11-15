@@ -13,7 +13,11 @@ public enum JoystickButton
 	VIEW,
 	START,
 	LEFT_STICK,
-	RIGHT_STICK
+	RIGHT_STICK,
+	DPAD_UP,
+	DPAD_LEFT,
+	DPAD_DOWN,
+	DPAD_RIGHT
 }
 
 public enum JoystickAxis
@@ -30,52 +34,105 @@ public enum JoystickAxis
 
 public class JoystickController
 {
-	private Dictionary<JoystickButton, string> buttons;
-	private Dictionary<JoystickAxis, string> axis;
+	private Dictionary<JoystickButton, string> winButtons;
+	private Dictionary<JoystickAxis, string> winAxis;
+	private Dictionary<JoystickButton, string> macButtons;
+	private Dictionary<JoystickAxis, string> macAxis;
+
+	private bool isMac;
 
 	public JoystickController(
-		Dictionary<JoystickButton, string> buttons,
-		Dictionary<JoystickAxis, string> axis
+		Dictionary<JoystickButton, string> winButtons,
+		Dictionary<JoystickAxis, string> winAxis,
+		Dictionary<JoystickButton, string> macButtons,
+		Dictionary<JoystickAxis, string> macAxis
 	)
 	{
-		this.buttons = buttons;
-		this.axis = axis;
+		this.winButtons = winButtons;
+		this.winAxis = winAxis;
+		this.macButtons = macButtons;
+		this.macAxis = macAxis;
+		this.isMac = 
+			Application.platform == RuntimePlatform.OSXEditor || 
+			Application.platform == RuntimePlatform.OSXPlayer;
 	}
 
-	public bool getKey(JoystickButton button)
+	public bool getButton(JoystickButton button)
 	{
+		if (button == JoystickButton.DPAD_UP && !this.isMac) 
+		{
+			return Input.GetAxis (this.getAxisName (JoystickAxis.DPAD_Y)) <= -0.5f;
+		}
+		else if (button == JoystickButton.DPAD_DOWN && !this.isMac) 
+		{
+			return Input.GetAxis (this.getAxisName (JoystickAxis.DPAD_Y)) >= 0.5f;
+		}
+		else if (button == JoystickButton.DPAD_LEFT && !this.isMac) 
+		{
+			return Input.GetAxis (this.getAxisName (JoystickAxis.DPAD_X)) <= -0.5f;
+		}
+		else if (button == JoystickButton.DPAD_RIGHT && !this.isMac) 
+		{
+			return Input.GetAxis (this.getAxisName (JoystickAxis.DPAD_X)) >= 0.5f;
+		}
 		return Input.GetButton (this.getButtonName (button));
 	}
 
-	public bool getKeyDown(JoystickButton button)
+	public bool getButtonDown(JoystickButton button)
 	{
 		return Input.GetButtonDown (this.getButtonName (button));
 	}
 
-	public bool getKeyUp(JoystickButton button)
+	public bool getButtonUp(JoystickButton button)
 	{
 		return Input.GetButtonUp (this.getButtonName (button));
 	}
 
 	public float getAxis(JoystickAxis axis)
 	{
+		if (axis == JoystickAxis.DPAD_X && this.isMac) 
+		{
+			if (getButton (JoystickButton.DPAD_LEFT)) {
+				return -1.0f;
+			} else if (getButton (JoystickButton.DPAD_RIGHT)) {
+				return 1.0f;
+			}
+		}
+		else if (axis == JoystickAxis.DPAD_Y && this.isMac) 
+		{
+			if (getButton (JoystickButton.DPAD_UP)) {
+				return -1.0f;
+			} else if (getButton (JoystickButton.DPAD_DOWN)) {
+				return 1.0f;
+			}
+		}
 		return Input.GetAxis (this.getAxisName (axis));
 	}
 
 	private string getButtonName(JoystickButton button)
 	{
-		if (this.buttons.ContainsKey (button)) 
-		{
-			return this.buttons [button];
+		if (this.isMac) {
+			if (this.macButtons.ContainsKey (button)) {
+				return this.macButtons [button];
+			}
+		} else {
+			if (this.winButtons.ContainsKey (button)) {
+				return this.winButtons [button];
+			}
 		}
 		return "";
 	}
 
 	private string getAxisName(JoystickAxis axis)
 	{
-		if (this.axis.ContainsKey (axis)) 
-		{
-			return this.axis [axis];
+		if (this.isMac) {
+			if (this.macAxis.ContainsKey (axis)) {
+				return this.macAxis [axis];
+			}
+		} else {
+			if (this.winAxis.ContainsKey (axis)) {
+				return this.winAxis [axis];
+			}
 		}
 		return "";
 	}
