@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FadeAway : MonoBehaviour 
+public class FadeEffect : MonoBehaviour 
 {
 	public float life;
 	private float counter = 0f;

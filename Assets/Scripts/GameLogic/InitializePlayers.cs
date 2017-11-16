@@ -28,7 +28,7 @@ public class InitializePlayers : MonoBehaviour
 		paddle1.getPaddle ().player = player1;
 
 		paddle2 = (GameObject)Instantiate(Resources.Load ("paddle"));
-		player2 = new Player (Color.blue, Joystick.GetJoystick("1"));
+		player2 = new Player (Color.blue, Joystick.GetJoystick("2"));
 		paddle2.getPaddle ().player = player2;
 
 		resetBall ();
@@ -49,8 +49,8 @@ public class InitializePlayers : MonoBehaviour
 			if(currentPlayer == player1) score2++;
 			if(currentPlayer == player2) score1++;
 
-			text1.text = "Score: " + score1;
-			text2.text = "Score: " + score2;
+			//text1.text = "Score: " + score1;
+			//text2.text = "Score: " + score2;
 			resetBall();
 		};
 		toggleCurrentPlayer ();

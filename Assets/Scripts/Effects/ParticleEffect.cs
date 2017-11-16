@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BgAnim : MonoBehaviour 
+public class ParticleEffect : MonoBehaviour 
 {
 	public float fromScale;
 	public float toScale;
