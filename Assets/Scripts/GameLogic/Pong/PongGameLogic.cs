@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class InitializePlayers : MonoBehaviour 
+public class PongGameLogic : MonoBehaviour 
 {
 	private GameObject ball;
 
@@ -21,6 +21,7 @@ public class InitializePlayers : MonoBehaviour
 
 		this.killBall ();
 		this.spawnBall ();
+		this.toggleCurrentPlayer ();
 	}
 
 	private void killBall()
@@ -48,12 +49,11 @@ public class InitializePlayers : MonoBehaviour
 			}
 			else
 			{
-				this.toggleCurrentPlayer();
 				this.killBall();
 				this.spawnBall();
+				this.toggleCurrentPlayer ();
 			}
 		};
-		this.toggleCurrentPlayer ();
 	}
 
 	private bool isGameOver()

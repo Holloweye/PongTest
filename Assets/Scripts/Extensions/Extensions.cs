@@ -65,7 +65,7 @@ public static class GameObjectExtensions
 		var oc = other.GetComponent<Collider2D> ();
 
 		if (sc != null && oc != null) {
-			Physics2D.IgnoreCollision (sc, oc, collide);
+			Physics2D.IgnoreCollision (sc, oc, !collide);
 		}
 	}
 }

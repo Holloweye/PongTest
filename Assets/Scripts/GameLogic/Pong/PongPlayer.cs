@@ -11,5 +11,6 @@ public class PongPlayer : Player
 	{
 		this.paddle = paddle;
 		this.hearts = hearts;
+		this.paddle.GetComponent<Paddle> ().player = player;
 	}
 }
