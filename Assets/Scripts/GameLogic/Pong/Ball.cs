@@ -27,7 +27,7 @@ public class Ball : MonoBehaviour
 		rendering = GetComponent<SpriteRenderer> ();
 		ball = GetComponent<Rigidbody2D> ();
 		angle = ((float)Random.Range(0, 360)).radians();
-		velocity = 2f;
+		velocity = 1f;
 	}
 	
 	void FixedUpdate () 
@@ -63,7 +63,7 @@ public class Ball : MonoBehaviour
 		}
 
 		angle = (finalAngle).radians();
-		velocity += 1f;
+		velocity += 0.1f;
 		onCollision();
 	}
 }
