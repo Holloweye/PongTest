@@ -40,4 +40,9 @@ public class Paddle : MonoBehaviour
 			rendering.color = player.color;
 		}
 	}
+
+	public void kill()
+	{
+		Destroy (this.gameObject);
+	}
 }

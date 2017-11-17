@@ -59,13 +59,14 @@ public static class CameraExtensions
 
 public static class GameObjectExtensions
 {
-	public static Paddle getPaddle(this GameObject self)
+	public static void setCollision(this GameObject self, GameObject other, bool collide)
 	{
-		return self.GetComponent<Paddle> ();
-	}
+		var sc = self.GetComponent<Collider2D>();
+		var oc = other.GetComponent<Collider2D> ();
 
-	public static Ball getBall(this GameObject self)
-	{
-		return self.GetComponent<Ball> ();
+		if (sc != null && oc != null) {
+			Physics2D.IgnoreCollision (sc, oc, collide);
+		}
 	}
 }
+	
