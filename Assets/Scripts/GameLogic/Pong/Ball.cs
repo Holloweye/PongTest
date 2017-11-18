@@ -27,7 +27,7 @@ public class Ball : MonoBehaviour
 		rendering = GetComponent<SpriteRenderer> ();
 		ball = GetComponent<Rigidbody2D> ();
 		angle = ((float)Random.Range(0, 360)).radians();
-		velocity = 1f;
+		velocity = 3f;
 	}
 	
 	void FixedUpdate () 
@@ -49,21 +49,29 @@ public class Ball : MonoBehaviour
 	{
 		var paddle = collision.gameObject.GetComponent<Rigidbody2D> ();
 
-		const float limitAngle = 40f;
-		var angleOfHit = ball.position.angle (paddle.position).degrees () + 180f;
-		var angleOfPaddle = paddle.rotation + 90f;
-		var angleDiff = (angleOfHit - angleOfPaddle + 180f + 360f) % 360f - 180f;
+		/*
+			https://math.stackexchange.com/questions/1844/how-to-calculate-reflected-light-angle
 
-		var finalAngle = angleOfHit;
+			x = angle of paddle
+			z = angle of ball
+			r = new angle of ball
 
-		if (angleDiff >= limitAngle) {
-			finalAngle -= (angleDiff - limitAngle);
-		} else if (angleDiff <= -limitAngle) {
-			finalAngle -= (angleDiff + limitAngle);
-		}
+			z' = 180 - z
+			a = 180 - (x + z')
+			r = -(a - x)
 
-		angle = (finalAngle).radians();
-		velocity += 0.1f;
+			one line:
+			r = -((180 - (x + (180 - z))) - x)
+		*/
+
+		var x = paddle.rotation + 90f;
+		var z = angle.degrees();
+		var zi = 180f - z;
+		var a = 180f - (x + zi);
+		var r = -(a - x) - 180f;
+		angle = r.radians();
+
+		velocity += 1.5f / velocity;
 		onCollision();
 	}
 }
