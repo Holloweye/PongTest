@@ -8,11 +8,14 @@ public class PongGameLogic : MonoBehaviour
 {
 	private PongPlayers players;
 	private PongBallManager ballManager;
+	private PongLightningController lightningController;
 	private const float timeUntilExtraBall = 5f;
 	private float extraBallTimer = timeUntilExtraBall;
 
 	void Start ()
 	{
+		this.lightningController = GetComponent<PongLightningController>();
+
 		List<PongPlayer> list = new List<PongPlayer>();
 		foreach (Player player in Players.active) 
 		{
@@ -38,6 +41,10 @@ public class PongGameLogic : MonoBehaviour
 			{
 				this.ballManager.SpawnBall(this.ballManager.GetRandomPlayerFreeFromBallInList(this.players.list));
 			}
+			else if(this.ballManager.GetNumberOfActiveBalls() == 1)
+			{
+				this.lightningController.active(false);
+			}
 		};
 	}
 
@@ -50,6 +57,7 @@ public class PongGameLogic : MonoBehaviour
 		{
 			this.ballManager.SpawnBall(this.ballManager.GetRandomPlayerFreeFromBallInList(this.players.list));
 			this.extraBallTimer = timeUntilExtraBall;
+			this.lightningController.active(true);
 		}
 	}
 }
