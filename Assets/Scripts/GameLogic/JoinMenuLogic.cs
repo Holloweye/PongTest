@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class JoinMenuLogic : MonoBehaviour 
 {
@@ -116,7 +115,7 @@ public class JoinMenuLogic : MonoBehaviour
 
 	private void showScene()
 	{
-		SceneManager.LoadScene ("PontScene");
+		SceneSwitcher.show (SceneType.PongGame);
 	}
 
 	private void setupPlayers()

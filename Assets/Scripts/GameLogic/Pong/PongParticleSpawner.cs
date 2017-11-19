@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ParticleSpawner : MonoBehaviour 
+public class PongParticleSpawner : MonoBehaviour 
 {
 	public float spawnRate = 0.1f;
 	public float lifeConst = 3f;
@@ -49,7 +49,7 @@ public class ParticleSpawner : MonoBehaviour
 		time += Time.deltaTime;
 		if (spawnCounter >= spawnRate) {
 
-			var square = (GameObject)Instantiate(Resources.Load ("square"));
+			var square = (GameObject)Instantiate(Resources.Load ("pong/square"));
 			square.transform.position = new Vector3 (
 				this.alg(this.time, 17f) * this.xMulti + this.xConst, 
 				this.alg(this.time, 18f) * this.yMulti + this.yConst, 

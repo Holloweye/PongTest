@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class PongGameLogic : MonoBehaviour 
 {
@@ -15,7 +14,7 @@ public class PongGameLogic : MonoBehaviour
 	void Start ()
 	{
 		foreach (Player player in Players.active) {
-			this.players.Add (new PongPlayer (player, (GameObject)Instantiate (Resources.Load ("paddle")), 3));
+			this.players.Add (new PongPlayer (player, (GameObject)Instantiate (Resources.Load ("pong/paddle")), 3));
 		}
 		this.currentPlayerIndex = 0;
 
@@ -27,25 +26,28 @@ public class PongGameLogic : MonoBehaviour
 	private void killBall()
 	{
 		if (this.ball != null) {
-			this.ball.GetComponent<Ball> ().Kill ();
+			this.ball.GetComponent<PongBall> ().Kill ();
 			this.ball = null;
 		}
 	}
 
 	private void spawnBall()
 	{
-		this.ball = (GameObject)Instantiate(Resources.Load ("ball"));
-		this.ball.GetComponent<Ball> ().onCollision = () => {
+		this.ball = (GameObject)Instantiate(Resources.Load ("pong/ball"));
+		this.ball.GetComponent<PongBall> ().onCollision = () => {
 			this.toggleCurrentPlayer ();
 		};
-		this.ball.GetComponent<Ball> ().onExit = () => {
+		this.ball.GetComponent<PongBall>().onLeaveGameArea = () => {
+
+		};
+		this.ball.GetComponent<PongBall> ().onExit = () => {
 
 			this.currentPlayer().hearts--;
 			this.removeKilledPlayers();
 
 			if(this.isGameOver())
 			{
-				SceneManager.LoadScene ("JoinMenu");
+				SceneSwitcher.show(SceneType.JoinMenu);
 			}
 			else
 			{
@@ -65,7 +67,7 @@ public class PongGameLogic : MonoBehaviour
 	{
 		foreach (PongPlayer pp in this.players) {
 			if (pp.hearts <= 0) {
-				pp.paddle.GetComponent<Paddle> ().kill ();
+				pp.paddle.GetComponent<PongPaddle> ().kill ();
 			}
 		}
 		this.players = this.players.Where (player => player.hearts > 0).ToList ();
@@ -78,7 +80,7 @@ public class PongGameLogic : MonoBehaviour
 			this.currentPlayerIndex = 0;
 		}
 		this.updateBallCollision ();
-		this.ball.GetComponent<Ball>().color = this.currentPlayer().color;
+		this.ball.GetComponent<PongBall>().color = this.currentPlayer().color;
 	}
 
 	private void updateBallCollision()

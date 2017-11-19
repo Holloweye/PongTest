@@ -109,6 +109,19 @@ public class JoystickController
 		return Input.GetAxis (this.getAxisName (axis));
 	}
 
+	public bool isStickOverThreshold(JoystickAxis axis1, JoystickAxis axis2, float threshold = 0.1f)
+	{
+		return isAxisOverThreshold (axis1, threshold) || isAxisOverThreshold (axis2, threshold);
+	}
+
+	public bool isAxisOverThreshold(JoystickAxis axis, float threshold = 0.1f)
+	{
+		float value = getAxis (axis);
+		float upper = Mathf.Abs (threshold);
+		float lower = 0f - upper;
+		return value <= lower || value >= upper;
+	}
+
 	private string getButtonName(JoystickButton button)
 	{
 		if (this.isMac) {

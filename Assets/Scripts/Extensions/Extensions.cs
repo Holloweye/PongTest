@@ -29,6 +29,11 @@ public static class Vector2Extensions
 	{
 		return new Vector2 (self.x + value.x, self.y + value.y);
 	}
+
+	public static Vector3 vec3(this Vector2 self)
+	{
+		return new Vector3(self.x, self.y);
+	}
 }
 
 public static class FloatExtensions
@@ -54,6 +59,12 @@ public static class CameraExtensions
 	public static Vector2 mousePosition(this Camera self)
 	{
 		return self.ScreenToWorldPoint (Input.mousePosition);
+	}
+
+	public static bool inViewport(this Camera self, Vector2 position)
+	{
+		var pos = self.WorldToViewportPoint(position.vec3());
+		return pos.x >= 0f && pos.x <= 1f && pos.y >= 0f && pos.y <= 1f;
 	}
 }
 

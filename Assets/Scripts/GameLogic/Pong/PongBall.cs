@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ball : MonoBehaviour 
+public class PongBall : MonoBehaviour 
 {
 	private SpriteRenderer rendering;
 	private Rigidbody2D ball;
@@ -14,6 +14,9 @@ public class Ball : MonoBehaviour
 	public delegate void OnCollision();
 	public OnCollision onCollision;
 
+	public delegate void OnLeaveGameArea();
+	public OnLeaveGameArea onLeaveGameArea;
+
 	public delegate void OnExit();
 	public OnExit onExit;
 
@@ -24,25 +27,28 @@ public class Ball : MonoBehaviour
 
 	void Start () 
 	{
-		rendering = GetComponent<SpriteRenderer> ();
-		ball = GetComponent<Rigidbody2D> ();
-		angle = ((float)Random.Range(0, 360)).radians();
-		velocity = 3f;
+		this.rendering = GetComponent<SpriteRenderer> ();
+		this.ball = GetComponent<Rigidbody2D> ();
+		this.angle = ((float)Random.Range(0, 360)).radians();
+		this.velocity = 3f;
 	}
 	
 	void FixedUpdate () 
 	{
-		ball.position = ball.position.add (angle.bearing().multiply(velocity * Time.deltaTime));
-
-		var origin = new Vector2 (0, 0);
-		if (origin.distance (ball.position) > 6) {
-			onExit ();
+		this.ball.position = this.ball.position.add (this.angle.bearing().multiply(this.velocity * Time.deltaTime));
+		if (!Camera.main.inViewport(this.ball.position))
+		{
+			this.onExit();
+		}
+		else if ((new Vector2()).distance(this.ball.position) > 5.1f) 
+		{
+			this.onLeaveGameArea();
 		}
 	}
 
 	void Update()
 	{
-		rendering.color = color;
+		this.rendering.color = color;
 	}
 
 	void OnCollisionEnter2D(Collision2D collision)
@@ -69,9 +75,9 @@ public class Ball : MonoBehaviour
 		var zi = 180f - z;
 		var a = 180f - (x + zi);
 		var r = -(a - x) - 180f;
-		angle = r.radians();
 
-		velocity += 1.5f / velocity;
-		onCollision();
+		this.angle = r.radians();
+		this.velocity += 1.5f / velocity;
+		this.onCollision();
 	}
 }
