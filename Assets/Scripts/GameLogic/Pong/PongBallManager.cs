@@ -53,6 +53,11 @@ public class PongBallManager : MonoBehaviour
 		return players[s];
 	}
 
+	public int GetNumberOfActiveBalls()
+	{
+		return this.balls.Count;
+	}
+
 	/*
 	 * Spawns a new ball for a certain player.
 	 */
@@ -69,8 +74,8 @@ public class PongBallManager : MonoBehaviour
 		};
 		ball.GetComponent<PongBall> ().onExit = () => {
 			var playerBall = this.balls.Where(pb => pb.ball == ball).First();
-			this.onLeave(playerBall);
 			this.ReTarget(playerBall.ball, null);
+			this.onLeave(playerBall);
 		};
 		this.ReTarget(ball, player);
 	}

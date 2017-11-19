@@ -40,7 +40,7 @@ public class PongBall : MonoBehaviour
 		{
 			this.onExit();
 		}
-		else if ((new Vector2()).distance(this.ball.position) > 5.1f) 
+		else if ((new Vector2()).distance(this.ball.position) > 4.8f) 
 		{
 			this.onLeaveGameArea();
 		}
