@@ -19,7 +19,7 @@ public static class SceneSwitcher
 			break;
 
 		case SceneType.PongGame:
-			SceneManager.LoadScene ("PongGame");
+			SceneManager.LoadScene ("PongScene");
 			break;
 		}
 	}

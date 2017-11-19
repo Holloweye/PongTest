@@ -27,7 +27,7 @@ public class PongPaddle : MonoBehaviour
 			var origin = new Vector2 ();
 			angle = origin.angle (new Vector2 (
 				player.controller.getAxis (JoystickAxis.RIGHT_STICK_X), 
-				player.controller.getAxis (JoystickAxis.RIGHT_STICK_Y)));
+				-player.controller.getAxis (JoystickAxis.RIGHT_STICK_Y)));
 		}
 
 		paddle.position = angle.bearing ().multiply (5.0f);
@@ -41,7 +41,7 @@ public class PongPaddle : MonoBehaviour
 		}
 	}
 
-	public void kill ()
+	public void Kill ()
 	{
 		Destroy (this.gameObject);
 	}
