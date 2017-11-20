@@ -8,8 +8,8 @@ public class PongLightningController : MonoBehaviour
 	private LightningBoltScript lightningBoltScript;
 	private GameObject start;
 	private GameObject end;
-
 	private float time = 0f;
+	public AudioSource source;
 
 	private void Start () 
 	{
@@ -35,11 +35,12 @@ public class PongLightningController : MonoBehaviour
 	{
 		if(this.lightningBoltScript.ManualMode && active)
 		{
-			// TODO: Play sound effect.
+			this.source.Play();
 			this.lightningBoltScript.ManualMode = false;
 		}
 		else if(!active)
 		{
+			this.source.Stop();
 			this.lightningBoltScript.ManualMode = true;
 		}
 	}
